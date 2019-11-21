@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+
+button {
+  font-size: var(--font-size);
+}
+
+label {
+  display: block;
+}
+
+@import "~normalize.css";
+@import "variables";
+@import "tableau";
+
+.icon-btn {
+  border: 0;
+  outline: none;
+  display: flex;
+  align-items: center;
+  background-color: inherit;
+  color: var(--color-f8);
+  margin: 0;
+  padding: 0;
+  &:hover {
+    color: var(--color-f9);
+  }
+}

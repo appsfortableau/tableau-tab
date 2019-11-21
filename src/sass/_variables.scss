@@ -1,0 +1,45 @@
+:root {
+  --color-discrete: #4996B2;
+  --color-discrete-dark: #367E9C;
+  --color-continuous: #00B180;
+  --color-continuous-dark: #009768;
+  --color-confirmation: #2DCC97;
+  --color-confirmation-dark: #2FA37D;
+  --color-attention: #EB4454;
+  --color-attention-dark: #C93A47;
+  --color-action: #EB8F50;
+  --color-action-dark: #EB8F50;
+
+  --color-f1: #FAFAFA;
+  --color-f2: #F5F5F5;
+  --color-f2_5:#EBEBEB;
+  --color-f3: #E6E6E6;
+  --color-f4: #E1E1E1;
+  --color-f5: #D4D4D4;
+  --color-f6: #CBCBCB;
+  --color-f7: #B4B4B4;
+  --color-f8: #666666;
+  --color-f9: #333333;
+
+  --color-black-focused: black;
+  --color-black-primary: rgba(0,0,0,.80);
+  --color-black-secondary: rgba(0,0,0,.70);
+  --color-black-tertiary-dark: rgba(0,0,0,.60);
+  --color-black-tertiary: rgba(0,0,0,.56);
+  --color-black-disabled: rgba(0,0,0,.35);
+  --color-white-primary: white;
+  --color-white-secondary: rgba(255,255,255,.56);
+  --color-white-disabled: rgba(255,255,255,.35);
+
+  --font-family: 'Benton Sans', Helvetica, Arial, sans-serif;
+  --font-size-osx: 12pt;
+  --font-size-win: 10pt;
+
+  --line-height: 24px;
+
+  --spacing-y: 12px;
+  --spacing-x: 18px;
+
+  --branding-default: calc(50px - (12px * 2));
+  --branding-larger: calc(64px - (12px * 2));
+}
