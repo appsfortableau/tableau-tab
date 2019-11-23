@@ -4,7 +4,7 @@ module.exports = {
   pages: {
     index: {
       // entry for the page
-      entry: 'src/index/main.js',
+      entry: 'src/main.js',
       // the source template
       template: 'public/index.html',
       // output as dist/index.html
