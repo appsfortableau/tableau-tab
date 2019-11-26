@@ -18,6 +18,7 @@
         <label>Site</label>
         <input type="text" name="site" class="outline" v-model="form.site" />
       </div>
+
       <div class="group">
         <label>Reference</label>
         <input
@@ -27,6 +28,94 @@
           v-model="form.reference"
           @keypress.enter="$emit('title', $event.target.value)"
         />
+      </div>
+
+      <div class="group">
+        <label>Tabs</label>
+        <div class="radio-inline">
+          <label>
+            <input
+              type="radio"
+              name="tabs"
+              class="outline"
+              v-model="form.settings.tabs"
+              value="yes"
+            />
+            Yes
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="tabs"
+              class="outline"
+              v-model="form.settings.tabs"
+              value="no"
+            />
+            No
+          </label>
+        </div>
+      </div>
+
+      <div class="group">
+        <label>Toolbar</label>
+        <div class="radio-inline">
+          <label>
+            <input
+              type="radio"
+              name="toolbar"
+              class="outline"
+              v-model="form.settings.toolbar"
+              value="yes"
+            />
+            Yes
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="toolbar"
+              class="outline"
+              v-model="form.settings.toolbar"
+              value="no"
+            />
+            No
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="toolbar"
+              class="outline"
+              v-model="form.settings.toolbar"
+              value="top"
+            />
+            Top
+          </label>
+        </div>
+      </div>
+
+      <div class="group">
+        <label>Tooltip</label>
+        <div class="radio-inline">
+          <label>
+            <input
+              type="radio"
+              name="tooltip"
+              class="outline"
+              v-model="form.settings.tooltip"
+              value="yes"
+            />
+            Yes
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="tooltip"
+              class="outline"
+              v-model="form.settings.tooltip"
+              value="no"
+            />
+            No
+          </label>
+        </div>
       </div>
 
       <div class="actions">
@@ -123,7 +212,9 @@ export default {
       site: "infotopicsonline", // infotopicsonline
       reference: "Gender/Sheet1", // Gender/Sheet1 or AdminInsightsStarter/Overview
       settings: {
-        toolbar: false
+        tabs: "no",
+        toolbar: "no",
+        tooltip: "no"
       }
     }
   }),
@@ -219,6 +310,14 @@ export default {
     width: 100%;
     height: 100%;
     position: relative;
+  }
+}
+
+.radio-inline {
+  display: flex;
+  margin: 0 -5px;
+  > label {
+    padding: 0 5px;
   }
 }
 </style>
