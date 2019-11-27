@@ -94,14 +94,12 @@ export default {
       this.$store.commit("ADD_TABLEAU_VIEW");
     },
     resizedEvent(i, newH, newW) {
-      console.log("resized", i, newH, newW);
       this.$store.commit("UPDATE_TABLEAU_VIEW_GRID", {
         i,
         grid: { h: newH, w: newW }
       });
     },
     movedEvent(i, newX, newY) {
-      console.log("moved", i, newX, newY);
       this.$store.commit("UPDATE_TABLEAU_VIEW_GRID", {
         i,
         grid: { x: newX, y: newY }

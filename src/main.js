@@ -8,10 +8,15 @@ Vue.config.productionTip = false;
 // Before you create app
 Vue.config.devtools = true;
 
-console.log("Loaded Vue app");
-console.log("Env", process.env);
-
 new Vue({
   store,
-  render: h => h(App)
+  render: h => h(App),
+  created() {
+    let tableauEmbedJS = document.createElement("script");
+    tableauEmbedJS.setAttribute(
+      "src",
+      "https://eu-west-1a.online.tableau.com/javascripts/api/tableau-2.3.0.min.js"
+    );
+    document.head.appendChild(tableauEmbedJS);
+  }
 }).$mount("#app");

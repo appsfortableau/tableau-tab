@@ -158,12 +158,15 @@
       </button>
     </div>
 
-    <iframe
+    <div class="viz"></div>
+
+    <!-- <iframe
       class="iframe"
       v-if="showEmbed"
       :src="previewUrl"
       frameborder="0"
-    ></iframe>
+      @load="frameWasLoaded"
+    ></iframe> -->
   </div>
 </template>
 
@@ -204,8 +207,24 @@ export default {
   },
   mounted() {
     this.viewTitle = this.title;
+
+    const { site, reference } = this.config;
+
+    const containerDiv = this.$el.querySelector(".viz"),
+      url = `${this.baseUrl}t/${site}/views/${reference}`,
+      options = {
+        hideTabs: true,
+        onFirstInteractive: function() {
+          console.log("Run this code when the viz has finished loading.");
+        }
+      };
+
+    setTimeout(() => {
+      this.viz = new window.tableau.Viz(containerDiv, url, options);
+    }, 100);
   },
   data: () => ({
+    viz: null,
     dialog: false,
     viewTitle: "",
     form: {
@@ -264,6 +283,11 @@ export default {
     },
     deleteView() {
       this.$store.commit("DELETE_TABLEAU_VIEW", { i: this.index });
+    },
+    frameWasLoaded() {
+      // const iframeDoc =
+      // e.target.contentDocument || e.target.contentWindow.document;
+      // console.log(iframeDoc);
     }
   }
 };
