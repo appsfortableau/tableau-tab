@@ -13,6 +13,32 @@
       </div>
 
       <div class="group">
+        <label>Hide title</label>
+        <div class="radio-inline">
+          <label>
+            <input
+              type="radio"
+              name="hideTitle"
+              class="outline"
+              v-model="form.hideTitle"
+              :value="true"
+            />
+            Yes
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="hideTitle"
+              class="outline"
+              v-model="form.hideTitle"
+              :value="false"
+            />
+            No
+          </label>
+        </div>
+      </div>
+
+      <div class="group">
         <label>URL</label>
         <input
           type="text"
@@ -125,14 +151,16 @@
     <div class="pane-head">
       <h3
         class="pane-title"
-        v-if="title.length > 0 && showEmbed"
+        v-if="!form.hideTitle && title.length > 0 && showEmbed"
         v-text="title"
       ></h3>
 
       <button
         @click.prevent="dialog = !dialog"
         class="icon-btn"
-        :class="{ floating: title.length === 0 || !showEmbed }"
+        :class="{
+          floating: form.hideTitle || title.length === 0 || !showEmbed,
+        }"
       >
         <svg
           viewBox="0 0 24 24"
@@ -228,6 +256,7 @@ export default {
     url: '', // will be parsed
     form: {
       url: '',
+      hideTitle: false,
       settings: {
         tabs: 'no',
         toolbar: 'no',
