@@ -36,6 +36,15 @@
       There are no embeds defined, you can add them by clicking on top-right
       cornor "add" button.
     </div>
+    <div
+      v-if="layoutViews.length === 0"
+      style="position: fixed; bottom: 0; width: 60%; height: auto; right: 0;"
+    >
+      <img
+        style="width: 100%; height: auto; margin-bottom: -60%;"
+        src="https://appsfortableau.infotopics.com/wp-content/uploads/2023/02/unnamed-file-3.png"
+      />
+    </div>
 
     <grid-layout
       :layout="layoutViews"
