@@ -28,15 +28,15 @@
 
 <script>
 export default {
-  name: "Dialog",
+  name: 'Dialog',
   props: {
     value: { type: Boolean, default: false },
-    title: { type: String }
+    title: { type: String },
     // center: { type: Boolean, default: false }
   },
   data: () => ({
-    dialogVisible: false
-  })
+    dialogVisible: false,
+  }),
 };
 </script>
 <style lang="scss">

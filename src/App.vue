@@ -4,7 +4,7 @@
       <div>
         <img
           class="logo logo--larger"
-          src="https://appsfortableau.com/wp-content/uploads/2018/05/Logo_small_80.png"
+          src="https://appsfortableau.infotopics.com/wp-content/uploads/2020/10/Infotopics-Apps-for-Tableau-logo-275x100-1.svg"
           alt="Apps for Tableau"
         />
       </div>
@@ -28,6 +28,14 @@
         </button>
       </div>
     </header>
+
+    <div
+      style="margin: 0 10px; padding: 10px 0; text-align: center"
+      v-if="layoutViews.length === 0"
+    >
+      There are no embeds defined, you can add them by clicking on top-right
+      cornor "add" button.
+    </div>
 
     <grid-layout
       :layout="layoutViews"
@@ -54,7 +62,6 @@
         @moved="movedEvent"
       >
         <tableau-view
-          :base-url="baseUrl"
           :key="i"
           :title="view.title ? view.title : undefined"
           :index="i"
@@ -68,15 +75,15 @@
 </template>
 
 <script>
-import { GridLayout, GridItem } from "vue-grid-layout";
-import TableauView from "./components/TableauView";
+import { GridLayout, GridItem } from 'vue-grid-layout';
+import TableauView from './components/TableauView';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     TableauView,
     GridLayout,
-    GridItem
+    GridItem,
   },
   computed: {
     views() {
@@ -84,30 +91,27 @@ export default {
     },
     layoutViews() {
       return this.views.map(view => view.grid);
-    }
+    },
   },
-  data: () => ({
-    baseUrl: "https://eu-west-1a.online.tableau.com/"
-  }),
   methods: {
     newTableauView() {
-      this.$store.commit("ADD_TABLEAU_VIEW");
+      this.$store.commit('ADD_TABLEAU_VIEW');
     },
     resizedEvent(i, newH, newW) {
-      console.log("resized", i, newH, newW);
-      this.$store.commit("UPDATE_TABLEAU_VIEW_GRID", {
+      console.log('resized', i, newH, newW);
+      this.$store.commit('UPDATE_TABLEAU_VIEW_GRID', {
         i,
-        grid: { h: newH, w: newW }
+        grid: { h: newH, w: newW },
       });
     },
     movedEvent(i, newX, newY) {
-      console.log("moved", i, newX, newY);
-      this.$store.commit("UPDATE_TABLEAU_VIEW_GRID", {
+      console.log('moved', i, newX, newY);
+      this.$store.commit('UPDATE_TABLEAU_VIEW_GRID', {
         i,
-        grid: { x: newX, y: newY }
+        grid: { x: newX, y: newY },
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -1,11 +1,11 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import createPersistedState from "vuex-persistedstate";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
 const state = {
-  views: []
+  views: [],
 };
 
 const mutations = {
@@ -19,11 +19,11 @@ const mutations = {
       newIndex = Math.max(...Object.entries(views).map(x => x[1].grid.i)) + 1;
     }
     views.push({
-      title: "",
+      title: '',
       index: views.length,
       config: {},
       grid: { x: 0, y: 0, w: 5, h: 7, i: newIndex },
-      ...args
+      ...args,
     });
   },
   UPDATE_TABLEAU_VIEW({ views }, { config, i }) {
@@ -42,11 +42,11 @@ const mutations = {
     for (let x in views) {
       views[i].grid.i = x;
     }
-  }
+  },
 };
 
 export default new Vuex.Store({
   plugins: [createPersistedState()],
   state,
-  mutations
+  mutations,
 });

@@ -5,28 +5,21 @@
         <label>Title</label>
         <input
           type="text"
-          name="site"
           class="outline"
           v-model="viewTitle"
-          s
           @input="$emit('title', $event.target.value)"
           @keypress.enter="$emit('title', $event.target.value)"
         />
       </div>
 
       <div class="group">
-        <label>Site</label>
-        <input type="text" name="site" class="outline" v-model="form.site" />
-      </div>
-
-      <div class="group">
-        <label>Reference</label>
+        <label>URL</label>
         <input
           type="text"
-          name="site"
+          name="url"
           class="outline"
-          v-model="form.reference"
-          @keypress.enter="$emit('title', $event.target.value)"
+          :value="config.url || url"
+          @input="url = $event.target.value"
         />
       </div>
 
@@ -135,6 +128,7 @@
         v-if="title.length > 0 && showEmbed"
         v-text="title"
       ></h3>
+
       <button
         @click.prevent="dialog = !dialog"
         class="icon-btn"
@@ -168,104 +162,119 @@
 </template>
 
 <script>
-import TableauDialog from "./Dialog";
+import TableauDialog from './Dialog';
 
 // Sheet: https://eu-west-1a.online.tableau.com/t/infotopicsonline/views/Gender/Sheet1?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link
 // Dashboard: https://eu-west-1a.online.tableau.com/t/infotopicsonline/views/AdminInsightsStarter/Overview?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link
 
 export default {
-  name: "TableauView",
+  name: 'TableauView',
   components: {
-    TableauDialog
+    TableauDialog,
   },
   props: {
-    baseUrl: {
-      type: String,
-      required: true
-    },
     title: {
       type: String,
-      default: "Tableau embed view"
+      default: 'Tableau embed view',
     },
     index: {
       type: Number,
-      default: 0
+      default: 0,
     },
     config: {
       type: Object,
       default: () => ({
-        site: "", // infotopicsonline
-        reference: "", // Gender/Sheet1 or AdminInsightsStarter/Overview
+        url: '',
         config: {
-          toolbar: false
-        }
-      })
-    }
+          toolbar: false,
+        },
+      }),
+    },
   },
   mounted() {
     this.viewTitle = this.title;
   },
+  watch: {
+    url(u) {
+      if (!u || u.length === 0) {
+        return;
+      }
+      const orgUrl = new URL(
+        u
+          .replace('/#/site', '')
+          .replace('t/', '')
+          .trim()
+      );
+
+      const origin = orgUrl.origin;
+      let site = '';
+      let dash = orgUrl.pathname.replace(/^\//, '');
+      if (origin.includes('public')) {
+        dash = dash.replace(/^\/views\//, '');
+      } else {
+        const sp = dash.split('/views/');
+        site = sp[0];
+        dash = sp[1];
+      }
+
+      this.form.url = [origin, site ? `t/${site}/views` : null, dash]
+        .filter(x => x)
+        .join('/');
+    },
+  },
   data: () => ({
     dialog: false,
-    viewTitle: "",
+    viewTitle: '',
+    url: '', // will be parsed
     form: {
-      site: "infotopicsonline", // infotopicsonline
-      reference: "Gender/Sheet1", // Gender/Sheet1 or AdminInsightsStarter/Overview
+      url: '',
       settings: {
-        tabs: "no",
-        toolbar: "no",
-        tooltip: "no"
-      }
-    }
+        tabs: 'no',
+        toolbar: 'no',
+        tooltip: 'no',
+      },
+    },
   }),
   computed: {
     showEmbed() {
-      return (
-        this.config.site &&
-        this.config.reference &&
-        this.config.site.length > 2 &&
-        this.config.reference.length > 2
-      );
+      return this.config.url && this.config.url.length > 4;
     },
     previewUrl() {
-      const { site, reference } = this.config;
+      const { url } = this.config;
 
       const defaultParameters = {
-        embed: "yes",
-        showAppBanner: "no",
-        display_count: "n",
-        showVizHome: "n",
-        origin: "viz_share_link",
+        embed: 'yes',
+        showAppBanner: 'no',
+        display_count: 'n',
+        showVizHome: 'n',
+        origin: 'viz_share_link',
         showShareOptions: false,
-        ...this.form.settings
+        ...this.form.settings,
       };
 
-      return (
-        `${this.baseUrl}t/${site}/views/${reference}?` +
-        this.parseQueryString(defaultParameters)
-      );
-    }
+      return `${url}?` + this.parseQueryString(defaultParameters);
+    },
   },
   methods: {
     applyChanges() {
-      this.$store.commit("UPDATE_TABLEAU_VIEW", {
+      this.$store.commit('UPDATE_TABLEAU_VIEW', {
         config: this.form,
-        i: this.index
+        i: this.index,
       });
-      this.$emit("input", this.form);
+      this.$emit('input', this.form);
 
       this.dialog = false;
     },
     parseQueryString(params) {
       return Object.entries(params)
         .filter(x => x)
-        .map(param => ((param[0] = ":" + param[0]), param.join("=")))
-        .join("&");
+        .map(param => ((param[0] = ':' + param[0]), param.join('=')))
+        .join('&');
     },
     deleteView() {
-      this.$store.commit("DELETE_TABLEAU_VIEW", { i: this.index });
-    }
-  }
+      this.$store.commit('DELETE_TABLEAU_VIEW', { i: this.index });
+    },
+  },
 };
 </script>
 
