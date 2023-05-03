@@ -8,7 +8,7 @@
     },
     "permissions": ["tabs"],
     "chrome_url_overrides": {
-        "newtab": "dist/index.html"
+        "newtab": "index.html"
     },
     "content_security_policy": "script-src 'self' 'unsafe-eval' https://ajax.googleapis.com https://*.online.tableau.com; object-src 'self'"
   }
