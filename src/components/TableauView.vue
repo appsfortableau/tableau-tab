@@ -215,12 +215,20 @@ export default {
         url: '',
         config: {
           toolbar: false,
+          hideTitle: false,
+          settings: {
+            tabs: 'no',
+            toolbar: 'no',
+            tooltip: 'no',
+          },
         },
       }),
     },
   },
   mounted() {
     this.viewTitle = this.title;
+
+    this.form = Object.assign({}, this.config);
   },
   watch: {
     url(u) {

@@ -21,7 +21,15 @@ const mutations = {
     views.push({
       title: '',
       index: views.length,
-      config: {},
+      config: {
+        url: '',
+        hideTitle: false,
+        settings: {
+          tabs: 'no',
+          toolbar: 'no',
+          tooltip: 'no',
+        },
+      },
       grid: { x: 0, y: 0, w: 5, h: 7, i: newIndex },
       ...args,
     });
