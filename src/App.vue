@@ -34,7 +34,7 @@
       v-if="layoutViews.length === 0"
     >
       There are no embeds defined, you can add them by clicking on top-right
-      cornor "add" button.
+      corner "add" button.
     </div>
     <div
       v-if="layoutViews.length === 0"

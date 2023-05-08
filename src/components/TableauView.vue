@@ -277,6 +277,7 @@ export default {
         display_count: 'n',
         showVizHome: 'n',
         origin: 'viz_share_link',
+        device: 'desktop',
         showShareOptions: false,
         ...this.form.settings,
       };
