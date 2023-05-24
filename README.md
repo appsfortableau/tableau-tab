@@ -6,6 +6,11 @@
 
 This Tableau Chrome Extension allows users to easily embed Tableau visualizations on any web page and resize the panes to fit their desired size. It provides a seamless integration with Tableau, giving users the flexibility to customize their viewing experience.
 
+When I joined Infotopics | Apps for Tableau this was my first introduction project
+and wrote a blog about it, which you can read [here](https://appsfortableau.infotopics.com/news-company/we-want-you-to-meet-yoram-de-langen/).
+
+![Las Vegas example](./images/example-las-vegas.png)
+
 ## Features
 
 - Embed Tableau visualizations on any web page
