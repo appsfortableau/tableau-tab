@@ -1,28 +1,37 @@
 name: Build and Release
+
 on:
   release:
     types:
       - published
+
 jobs:
   build:
     name: Build and Release
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 14
+
       - name: Install dependencies
         run: yarn install
+
       - name: Build project
         run: yarn build
+
       - name: Set release version
         id: set_version
         run: echo "::set-output name=version::$(echo ${{ github.ref }} | awk -F / '{print $NF}')"
+
       - name: Zip dist assets
-        run: zip -r dist_${{ steps.set_version.outputs.version }}.zip dist
+        run: zip -r tableau-tab_${{ steps.set_version.outputs.version }}.zip dist
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -33,6 +42,7 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
+
       - name: Upload Release Assets
         id: upload_release_assets
         uses: actions/upload-release-asset@v1
@@ -40,6 +50,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist_${{ steps.set_version.outputs.version }}.zip
-          asset_name: dist_${{ steps.set_version.outputs.version }}.zip
+          asset_path: ./tableau-tab_${{ steps.set_version.outputs.version }}.zip
+          asset_name: tableau-tab.zip
           asset_content_type: application/zip
+
