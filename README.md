@@ -1,6 +1,8 @@
 # Tableau Chrome Extension
 
-![Infotopics Apps for Tableau](https://appsfortableau.infotopics.com/wp-content/uploads/2020/10/Infotopics-Apps-for-Tableau-logo-275x100-1.svg)
+<p align="center">
+  <img src="https://appsfortableau.infotopics.com/wp-content/uploads/2020/10/Infotopics-Apps-for-Tableau-logo-275x100-1.svg" alt="Infotopics Apps for Tableau" />
+</p>
 
 This Tableau Chrome Extension allows users to easily embed Tableau visualizations on any web page and resize the panes to fit their desired size. It provides a seamless integration with Tableau, giving users the flexibility to customize their viewing experience.
 
