@@ -19,7 +19,7 @@ jobs:
       - name: Build project
         run: yarn build
       - name: Zip dist assets
-        run: zip -r tableau-tab_.zip dist
+        run: cd dist; zip -r tableau-tab.zip .
       - if: startsWith(github.ref, 'refs/tags/')
         name: Upload Release Assets
         uses: softprops/action-gh-release@v1
