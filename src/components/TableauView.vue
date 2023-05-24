@@ -227,7 +227,6 @@ export default {
   },
   mounted() {
     this.viewTitle = this.title;
-
     this.form = Object.assign({}, this.config);
   },
   watch: {
