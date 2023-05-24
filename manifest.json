@@ -1,6 +1,6 @@
 {
     "name": "Tableau tab",
-    "version": "1.0",
+    "version": "1.1.2",
     "description": "Open a dashboard directly in new tab.",
     "manifest_version": 2,
     "background": {
